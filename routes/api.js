@@ -107,10 +107,10 @@ router.get('/users', function(req, res) {
 				data: []
 			});
 		} else {
-			if(!Users){
+			if(!User){
         		res.status(404).send({
           		message: 'Id was not found',
-          		data: Users
+          		data: User
         		});
       		}
       		else {
