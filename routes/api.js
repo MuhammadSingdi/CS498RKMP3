@@ -67,7 +67,7 @@ router.delete('/users/:id', function(req, res){
           		data: Users
         		});
       		}
-			else {res.status(201).send({
+			else {res.status(200).send({
 				message: "resource deleted",
 				data: Users
 			});
@@ -114,7 +114,7 @@ router.get('/users', function(req, res) {
         		});
       		}
       		else {
-			res.status(201).send({
+			res.status(200).send({
 				message: "OK",
 				data: User
 			});
