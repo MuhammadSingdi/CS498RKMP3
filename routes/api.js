@@ -7,7 +7,7 @@ router.post('/users', function(req, res) {
 	var userData = {
 		name: req.body.name,
 		email: req.body.email,
-		pendingTasks: req.body.pendingTasks
+		pendingTasks: req.body.pendingTasks || []
 	}
 	userSchema.create(userData, function(err, Users){
 		if(err) {
@@ -28,7 +28,7 @@ router.put('/users/:id', function(req, res) {
 	var userData = {
 		name: req.body.name,
 		email: req.body.email,
-		pendingTasks: req.body.pendingTasks
+		pendingTasks: req.body.pendingTasks || []
 	}
 	userSchema.findByIdAndUpdate(req.params.id, userData, function(err, Users){
 		if(err) {
@@ -62,7 +62,7 @@ router.delete('/users/:id', function(req, res){
 			});
 		} else {
 			if(!Users){
-        		res.status(200).send({
+        		res.status(404).send({
           		message: 'Id was not found',
           		data: Users
         		});
