@@ -30,7 +30,7 @@ router.put('/users/:id', function(req, res) {
 		email: req.body.email,
 		pendingTasks: req.body.pendingTasks || []
 	}
-	userSchema.findByIdAndUpdate(req.params.id, userData, function(err, Users){
+	userSchema.findByIdAndUpdate(req.params.id, userData, {new: true}, function(err, Users){
 		if(err) {
 			res.status(404).send({
 				messages: err,
