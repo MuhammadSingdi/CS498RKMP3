@@ -137,7 +137,7 @@ router.get('/users', function(req, res) {
 				data: []
 			});
 		} else {
-			dataToSend = countQ == true ? users.length : tasks;
+			dataToSend = countQ == true ? tasks.length : tasks;
 			res.status(200).send({
 				message: 'OK',
 				data: dataToSend
