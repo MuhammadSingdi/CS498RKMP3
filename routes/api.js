@@ -44,7 +44,7 @@ router.put('/users/:id', function(req, res) {
         		});
       		}
       		else{
-			res.status(200).send({
+			res.status(201).send({
 				message: 'OK',
 				data: Users
 			});
@@ -204,7 +204,7 @@ var taskData = {
 				data: []
 			});
 		} else {
-			res.status(200).send({
+			res.status(201).send({
 				message: 'OK',
 				data: tasks
 			});
@@ -220,7 +220,7 @@ router.delete('/tasks/:id', function(req, res){
 				data: []
 			});
 		} else {
-			res.status(200).send({
+			res.status(201).send({
 				message: "resource deleted",
 				data: tasks
 			});
