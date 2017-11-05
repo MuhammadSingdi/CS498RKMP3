@@ -44,7 +44,7 @@ router.put('/users/:id', function(req, res) {
         		});
       		}
       		else{
-			res.status(201).send({
+			res.status(200).send({
 				message: 'OK',
 				data: Users
 			});
