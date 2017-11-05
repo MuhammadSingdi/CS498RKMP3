@@ -154,10 +154,18 @@ router.get('/tasks/:id', function(req, res){
 				data: []
 			});
 		} else {
-			res.status(201).send({
+			if(!Task){
+        		res.status(404).send({
+          		message: 'Task was not found',
+          		data: Task
+        		});
+      		}
+      		else {
+			res.status(200).send({
 				message: "OK",
 				data: Task
 			});
+		}
 		}
     });
   });
