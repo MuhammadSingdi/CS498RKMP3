@@ -62,7 +62,7 @@ router.delete('/users/:id', function(req, res){
 			});
 		} else {
 			if(!Users){
-        		res.status(404).send({
+        		res.status(200).send({
           		message: 'Id was not found',
           		data: Users
         		});
