@@ -220,10 +220,18 @@ router.delete('/tasks/:id', function(req, res){
 				data: []
 			});
 		} else {
+			if(!tasks){
+        		res.status(404).send({
+          		message: 'Task was not found',
+          		data: tasks
+        		});
+      		}
+      		else {
 			res.status(200).send({
 				message: "resource deleted",
 				data: tasks
 			});
+		}
 		}
 	});
 });
