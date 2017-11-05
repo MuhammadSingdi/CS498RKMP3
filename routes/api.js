@@ -205,7 +205,7 @@ var taskData = {
 	 assignedUserName: req.body.assignedUserName
 	}
 
-	taskSchema.findByIdAndUpdate(req.params.id, taskData, function(err, tasks){
+	taskSchema.findByIdAndUpdate(req.params.id, taskData, {new: true}, function(err, tasks){
 		if(err) {
 			res.status(404).send({
 				messages: err,
