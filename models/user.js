@@ -8,8 +8,9 @@ var UserSchema = new mongoose.Schema({
         required: [true, "Name is required"]
     },
     email: {
-        type:String,
-        required: [true, "Email is required"]
+        type: String,
+        required: [true, "Email is required"],
+        unique: true
     },
     pendingTasks: [String],
     dateCreated: {type: Date, default: Date.now}
@@ -17,3 +18,5 @@ var UserSchema = new mongoose.Schema({
 
 // Export the Mongoose model
 module.exports = mongoose.model('User', UserSchema);
+
+
