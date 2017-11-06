@@ -9,9 +9,8 @@ var express = require('express'),
 var app = express();
 
 // Include Schema
-
 var apiRoutes = require('./routes/api');
-//var userSchema = require('./routes/userRoute')
+
 
 // Use environment defined port or 3000
 var port = process.env.PORT || 3000;
@@ -35,11 +34,11 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // Use routes as a module (see index.js)
-// require('./routes')(app, router);
+require('./routes')(app, router);
 app.use('/api', apiRoutes);
-app.get('/', function(req, res) {
-	res.send("hello worldsss");
-});
+// app.get('/', function(req, res) {
+// 	res.send("hello worldsss");
+// });
 
 // Start the server
 app.listen(port);

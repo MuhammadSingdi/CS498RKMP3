@@ -32,7 +32,7 @@ router.put('/users/:id', function(req, res) {
 	}
 	userSchema.findByIdAndUpdate(req.params.id, userData, {new: true}, function(err, Users){
 		if(err) {
-			res.status(404).send({
+			res.status(500).send({
 				messages: err,
 				data: []
 			});
@@ -56,7 +56,7 @@ router.put('/users/:id', function(req, res) {
 router.delete('/users/:id', function(req, res){
 	userSchema.findByIdAndRemove(req.params.id, function(err, Users){
 		if(err) {
-			res.status(404).send({
+			res.status(500).send({
 				message: err,
 				data: []
 			});
@@ -82,7 +82,7 @@ router.get('/users', function(req, res) {
 	var selectQ = req.query.select != null ? JSON.parse(req.query.select) : '';
 	var skipQ = req.query.skip != null ? JSON.parse(req.query.skip) : '';
 	var limitQ = req.query.limit != null ? JSON.parse(req.query.limit) : '';
-	var countQ = req.query.count != null ? JSON.parse(req.query.count) : '';
+	var countQ = req.query.count != null ? JSON.parse(req.query.count) : false;
 	userSchema.find(whereQ, function(err, users) {
 		if(err) {
 			res.status(500).send({
@@ -102,7 +102,7 @@ router.get('/users', function(req, res) {
   router.get('/users/:id', function(req, res){
     userSchema.findById(req.params.id, function(err, User){
       if(err) {
-			res.status(404).send({
+			res.status(500).send({
 				messages: err,
 				data: []
 			});
@@ -129,7 +129,7 @@ router.get('/users', function(req, res) {
 	var selectQ = req.query.select != null ? JSON.parse(req.query.select) : '';
 	var skipQ = req.query.skip != null ? JSON.parse(req.query.skip) : '';
 	var limitQ = req.query.limit != null ? JSON.parse(req.query.limit) : '';
-	var countQ = req.query.count != null ? JSON.parse(req.query.count) : '';
+	var countQ = req.query.count != null ? JSON.parse(req.query.count) : false;
 	taskSchema.find(whereQ, function(err, tasks) {
 		if(err) {
 			res.status(500).send({
@@ -149,7 +149,7 @@ router.get('/users', function(req, res) {
 router.get('/tasks/:id', function(req, res){
     taskSchema.findById(req.params.id, function(err, Task){
       if(err) {
-			res.status(404).send({
+			res.status(500).send({
 				messages: err,
 				data: []
 			});
@@ -207,15 +207,23 @@ var taskData = {
 
 	taskSchema.findByIdAndUpdate(req.params.id, taskData, {new: true}, function(err, tasks){
 		if(err) {
-			res.status(404).send({
+			res.status(500).send({
 				messages: err,
 				data: []
 			});
 		} else {
+			if(!tasks){
+        		res.status(404).send({
+          		message: 'Id was not found',
+          		data: tasks
+        		});
+      		}
+      		else {
 			res.status(200).send({
 				message: 'OK',
 				data: tasks
 			});
+			}
 		}
 	});
 });
@@ -223,7 +231,7 @@ var taskData = {
 router.delete('/tasks/:id', function(req, res){
 	taskSchema.findByIdAndRemove(req.params.id, function(err, tasks){
 		if(err) {
-			res.status(404).send({
+			res.status(500).send({
 				messages: err,
 				data: []
 			});
